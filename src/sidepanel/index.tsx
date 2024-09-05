@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-import "./index.css" // Tailwind CSS 적용
+import "../index.css" // Tailwind CSS 적용
 
 function Popup() {
   const [count, setCount] = useState(0)
@@ -10,7 +10,7 @@ function Popup() {
   }
 
   return (
-    <div className="w-[400px] h-[300px] p-6 bg-gradient-to-r from-purple-500 to-blue-500 flex flex-col items-center justify-center shadow-xl">
+    <div className="w-full h-full min-h-screen p-6 bg-gradient-to-r from-purple-500 to-blue-500 flex flex-col items-center justify-center shadow-xl">
       <h1 className="text-2xl font-bold text-white mb-4 animate-bounce">
         Stylish Clicker
       </h1>
