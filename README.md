@@ -1,33 +1,33 @@
-This is a [Plasmo extension](https://docs.plasmo.com/) project bootstrapped with [`plasmo init`](https://www.npmjs.com/package/plasmo).
+# Memento - Chrome Extension
 
-## Getting Started
+Memento is a Chrome extension designed for effortless quote creation and sharing. With a simple drag-and-drop interface, you can overlay custom quotes and author names on your images, transforming them into beautiful, shareable moments.
 
-First, run the development server:
+### Features
 
-```bash
-pnpm dev
-# or
-npm run dev
-```
+- **Image Upload**: Easily upload images via drag-and-drop or file selection.
+- **Custom Quotes**: Input your favorite quotes and add the author's name.
+- **Social Media Icons**: Select from popular social media icons like Facebook, Instagram, Twitter, Threads, and YouTube to brand your image.
+- **Black & White Filter**: Automatically apply a black & white filter to your images for a classic look.
+- **Download or Copy to Clipboard**: Download your customized image or copy it directly to your clipboard for easy sharing.
+- **Responsive Design**: Works seamlessly across different screen sizes and devices.
 
-Open your browser and load the appropriate development build. For example, if you are developing for the chrome browser, using manifest v3, use: `build/chrome-mv3-dev`.
+### How to Use
 
-You can start editing the popup by modifying `popup.tsx`. It should auto-update as you make changes. To add an options page, simply add a `options.tsx` file to the root of the project, with a react component default exported. Likewise to add a content page, add a `content.ts` file to the root of the project, importing some module and do some logic, then reload the extension on your browser.
+1. **Upload an Image**: Drag and drop an image or click to select one from your computer.
+2. **Add a Quote**: Enter your favorite quote in the text field.
+3. **Choose an Author**: Add the author's name.
+4. **Select an Icon**: Choose a social media icon (optional) to overlay on your image.
+5. **Generate**: Click the "Generate" button to create your customized image.
+6. **Download or Copy**: Once generated, download the image or copy it to your clipboard for sharing.
 
-For further guidance, [visit our Documentation](https://docs.plasmo.com/)
+### Installation
 
-## Making production build
+You can install the Memento Chrome extension directly from the Chrome Web Store:
 
-Run the following:
+[Download Memento](https://chromewebstore.google.com/detail/memento-refactoring/nmegkgjgheemjmeigjijcpabalkmipdg?hl=ko&utm_source=ext_sidebar)
 
-```bash
-pnpm build
-# or
-npm run build
-```
+### License
 
-This should create a production bundle for your extension, ready to be zipped and published to the stores.
+This project is licensed under the MIT License.
 
-## Submit to the webstores
-
-The easiest way to deploy your Plasmo extension is to use the built-in [bpp](https://bpp.browser.market) GitHub action. Prior to using this action however, make sure to build your extension and upload the first version to the store to establish the basic credentials. Then, simply follow [this setup instruction](https://docs.plasmo.com/framework/workflows/submit) and you should be on your way for automated submission!
+By providing essential details like features, how to use the extension, and steps for installation, this README.md can help users understand what the extension does and how they can install it. Make sure to replace the placeholder repository link with your actual GitHub link if you plan to share the code.
