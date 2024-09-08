@@ -1,13 +1,14 @@
 import { useRef, useState } from "react"
-import {
-  FaArrowRotateLeft,
-  FaFacebook,
-  FaInstagram,
-  FaThreads,
-  FaXTwitter,
-  FaYoutube
-} from "react-icons/fa6"
 import { IoMdCloseCircle } from "react-icons/io"
+
+import AuthorInput from "./components/AuthorInput"
+import DropZone from "./components/DropZone"
+import FileInput from "./components/FileInput"
+import FullWidthBlueButton from "./components/FullWidthBlueButton"
+import HalfWidthButton from "./components/HalfWidthButton"
+import PreviewImage from "./components/PreviewImage"
+import QuoteInput from "./components/QuoteInput"
+import SnsIconSelector from "./components/SnsIconSelector"
 
 import "../index.css" // Tailwind CSS 적용
 
@@ -26,15 +27,6 @@ const Index = () => {
   const [selectedIcon, setSelectedIcon] = useState<string>("none")
   const fileInputRef = useRef<HTMLInputElement>(null)
   const canvasRef = useRef(null)
-
-  const snsIcons = [
-    { id: "none", icon: <IoMdCloseCircle />, color: "#CCCCCC" },
-    { id: "instagram", icon: <FaInstagram />, color: "#E4405F" },
-    { id: "facebook", icon: <FaFacebook />, color: "#1877F2" },
-    { id: "x", icon: <FaXTwitter />, color: "#1DA1F2" },
-    { id: "youtube", icon: <FaYoutube />, color: "#FF0000" },
-    { id: "threads", icon: <FaThreads />, color: "#FF0000" }
-  ]
 
   // 각 아이콘에 대한 Image 객체 생성
   const instagramIcon = new Image()
@@ -281,107 +273,39 @@ const Index = () => {
       onDrop={handleDrop}
       onDragOver={(e) => e.preventDefault()}>
       {inputImageSrc ? (
-        <div className="w-full flex flex-col items-center justify-center">
-          <div>
-            <img
-              src={inputImageSrc}
-              alt="Preview"
-              className="max-w-full max-h-full object-contain"
-            />
-          </div>
-          <div className="w-full flex justify-end mt-2">
-            <button
-              className="reset-button"
-              style={{ fontSize: "0.7rem" }}
-              onClick={() => setInputImageSrc("")}>
-              <FaArrowRotateLeft />
-            </button>
-          </div>
-        </div>
+        <PreviewImage inputImageSrc={inputImageSrc} onReset={handleReset} />
       ) : (
-        <div
-          id="drop-zone"
-          onClick={handleClick}
-          onDrop={handleDrop}
-          onDragOver={(e) => e.preventDefault()}
-          className="w-full h-48 border-2 border-dashed flex items-center justify-center text-gray-500 cursor-pointer">
-          <span>Drop image here or click to select</span>
-        </div>
+        <>
+          <DropZone handleClick={handleClick} handleDrop={handleDrop} />
+          <FileInput fileInputRef={fileInputRef} handleFile={handleFile} />
+        </>
       )}
-      <input
-        ref={fileInputRef}
-        type="file"
-        id="image-input"
-        accept="image/*"
-        onChange={(e) => handleFile(e.target.files![0])}
-        className="hidden"
+      <QuoteInput quote={quote} setQuote={setQuote} />
+      <SnsIconSelector
+        selectedIcon={selectedIcon}
+        setSelectedIcon={setSelectedIcon}
       />
-      <textarea
-        id="quote-input"
-        rows={3}
-        value={quote}
-        onChange={(e) => setQuote(e.target.value)}
-        placeholder="Enter your quote"
-        className="w-full border-2 p-2 mt-4"
-      />
-      <div className="flex space-x-4 mt-4">
-        {snsIcons.map((sns) => (
-          <div
-            key={sns.id}
-            onClick={() => setSelectedIcon(sns.id)}
-            className="cursor-pointer"
-            style={{
-              color: selectedIcon === sns.id ? sns.color : "gray",
-              filter: selectedIcon === sns.id ? "none" : "grayscale(100%)",
-              fontSize: "1rem", // 아이콘 크기 설정
-              transition: "color 0.2s ease" // 부드러운 색상 전환
-            }}>
-            {sns.id === "none" && selectedIcon === "none" ? (
-              <IoMdCloseCircle style={{ color: "red" }} /> // none 선택 시 빨간색 아이콘
-            ) : (
-              sns.icon
-            )}
-          </div>
-        ))}
-      </div>
-      <input
-        id="author-input"
-        type="text"
-        value={author}
-        onChange={(e) => setAuthor(e.target.value)}
-        placeholder="Author"
-        className="w-full border-2 p-2 mt-2"
-      />
-      <button
-        id="generate-button"
-        onClick={handleGenerate}
-        className="w-full bg-blue-500 text-white font-bold p-3 mt-4 rounded-lg">
-        Generate
-      </button>
+      <AuthorInput author={author} setAuthor={setAuthor} />
+      <FullWidthBlueButton buttonName="Generate" onClick={handleGenerate} />
       <canvas ref={canvasRef} style={{ display: "none" }} />
     </div>
   ) : (
-    <div
-      className="container h-screen mx-auto p-4"
-      onDrop={handleDrop}
-      onDragOver={(e) => e.preventDefault()}>
+    <div className="container h-screen mx-auto p-4">
       <img src={outputImageSrc} alt="Processed" />
       <p className="mt-2 text-gray-500 animate-pulse">
         The image has been copied to your clipboard. Paste it wherever you like.
       </p>
       <div className="flex w-full">
-        <button
-          id="download-button"
+        <HalfWidthButton
+          buttonName="Download"
+          addTailwindClassName="bg-blue-500"
           onClick={handleDownload}
-          className="w-1/2 bg-blue-500 text-white font-bold p-3 mt-4 mr-2 rounded-lg">
-          Download
-        </button>
-        <button
-          id="reset-button"
+        />
+        <HalfWidthButton
+          buttonName="Reset"
+          addTailwindClassName="bg-red-500 ml-2"
           onClick={handleReset}
-          className="w-1/2 bg-red-500 text-white font-bold p-3 mt-4 ml-2 rounded-lg">
-          Reset
-        </button>
+        />
       </div>
     </div>
   )
